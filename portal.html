@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouthSystem Dashboard</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 15px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .dashboard {
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #fff;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 14px;
+      margin: 5px 0;
+    }
+
+    .btn {
+      margin-top: 15px;
+      padding: 12px;
+      width: 100%;
+      background: #fff;
+      color: #333;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .btn:hover {
+      background: #ffd700;
+      transform: translateY(-3px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <img id="userPhoto" src="" alt="User Photo">
+    <h1 id="userName">Welcome</h1>
+    <p><strong>⛪ Outstation:</strong> <span id="userOutstation"></span></p>
+    <p><strong>⚧ Gender:</strong> <span id="userGender"></span></p>
+    <p><strong>📅 Date of Birth:</strong> <span id="userDob"></span></p>
+    <p><strong>👤 Username:</strong> <span id="userUsername"></span></p>
+
+    <button class="btn" onclick="logout()">🚪 Logout</button>
+    <button class="btn" onclick="window.location.href='Audio.html'">🎧 Audio</button>
+    <button class="btn" onclick="window.location.href='Events.html'">📅 Calendar</button>
+  </div>
+
+  <script>
+    let userData = JSON.parse(localStorage.getItem("userData"));
+
+    if(userData){
+      document.getElementById("userPhoto").src = userData.photo || "default.png";
+      document.getElementById("userName").textContent = "👋 Welcome, " + userData.fullName;
+      document.getElementById("userOutstation").textContent = userData.outstation;
+      document.getElementById("userGender").textContent = userData.gender;
+      document.getElementById("userDob").textContent = userData.dob;
+      document.getElementById("userUsername").textContent = userData.username;
+    } else {
+      alert("⚠️ No user found. Please register first.");
+      window.location.href = "register.html";
+    }
+
+    function logout(){
+      localStorage.removeItem("userData");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

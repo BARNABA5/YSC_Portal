@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouthSystem Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>👋 Welcome to YSC</h1>
+    <p>Please login to access your portal 🚪</p>
+
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="👤 Username" required>
+      <input type="password" id="password" placeholder="🔑 Password" required>
+      <button type="submit">➡️ Login</button>
+    </form>
+
+    <p class="note">✨ Together we journey. Together we serve ✨</p>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+      let userData = JSON.parse(localStorage.getItem("userData"));
+
+      if(userData && userData.username === username && userData.password === password){
+        window.location.href = "portal.html";
+      } else {
+        alert("⚠️ Invalid username or password!");
+      }
+    });
+  </script>
+</body>
+</html>
